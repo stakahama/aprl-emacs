@@ -8,7 +8,7 @@
 
 ;;;_* set global var
 (setq aprl-package-directory "~/.emacs.d/elpa")
-(setq aprl-desired-packages '(python-mode ipython ess auctex))
+(setq aprl-desired-packages '(ess auctex))
 
 ;;;_* define functions
 

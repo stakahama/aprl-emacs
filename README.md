@@ -44,6 +44,7 @@ $ wget -c https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el
 ```
 
 Additional reading:
+
 - [Emacs as a Python IDE](http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/)
 
 Configure
