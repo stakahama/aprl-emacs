@@ -43,6 +43,14 @@ $ mkdir ~/.emacs.d/site-lisp/ipython && cd ~/.emacs.d/site-lisp/ipython
 $ wget -c https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el
 ```
 
+These files will not get byte-compiled automatically with ELPA packages; they can be compiled from the command line:
+
+```sh
+$ cd ~/.emacs.d/site-lisp
+$ emacs -q --batch --eval '(byte-recompile-directory "python-mode" 0)'
+$ emacs -q --batch -l python-mode/python-mode.el -f batch-byte-compile ipython/ipython.el
+```
+
 Additional reading:
 
 - [Emacs as a Python IDE](http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/)
