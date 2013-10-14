@@ -114,9 +114,6 @@ In addition, there are other packages not available on these repositories. `El-g
 - [`igor-mode`](https://github.com/yamad/igor-mode)
 - [`folding`](http://www.emacswiki.org/emacs/FoldingMode)
 - [`color-theme-tangotango`](https://github.com/juba/color-theme-tangotango)
-<!-- - [`pylookup`](https://github.com/tsgates/pylookup) -->
-<!-- - [`popup`](https://github.com/auto-complete/popup-el) -->
-<!-- - [`dirtree`](http://www.emacswiki.org/emacs/dirtree.el) -->
 
 and so on. 
 
