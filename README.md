@@ -21,6 +21,8 @@ $ cd ~/.emacs.d/aprl
 $ emacs -Q --script aprl-install-packages-elpa.el
 ```
 
+Note that `emacs` is nominally `/usr/bin/emacs`. For os x, instead of the pre-installed version (terminal-only) I use the cocoa port of emacs, which is installed to `/Applications/Emacs.app/Contents/MacOS/Emacs`.
+
 Some packages (or their latest versions) are not available through ELPA (even with additional repositories). This includes python-mode and ipython; see below.
 
 
