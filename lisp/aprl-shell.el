@@ -44,4 +44,4 @@
 
 ;;;_ . --- custom variables ---
 
-(customize-save-variable 'explicit-shell-file-name "/bin/bash")
+(setq-default explicit-shell-file-name "/bin/bash")

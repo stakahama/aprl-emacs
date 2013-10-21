@@ -82,6 +82,6 @@
 ;;       (add-to-list 'term-bind-key-alist bind))))
 
 ;;;_ . customize
-(customize-save-variable 'term-default-bg-color "#000000") ; background color (black)
-(customize-save-variable 'term-default-fg-color "#dddd00") ; foreground color (yellow)
+(setq-default term-default-bg-color "#000000") ; background color (black)
+(setq-default term-default-fg-color "#dddd00") ; foreground color (yellow)
 

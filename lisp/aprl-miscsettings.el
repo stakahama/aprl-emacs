@@ -86,9 +86,9 @@
 
 ;;;_* ===== custom variables =====
 
-(customize-save-variable 'indicate-empty-lines t)
-(customize-save-variable 'pop-up-windows nil)
-(customize-save-variable 'warning-suppress-types (quote ((server))))
-(customize-save-variable 'safe-local-variable-values (quote ((outline-minor-mode) (whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark))))
-(customize-save-variable 'same-window-buffer-names (quote ("*shell*" "*shell*<2>" "*shell*<2>" "*shell*<3>" "*shell*<4>" "*shell*<5>" "*mail*" "*inferior-lisp*" "*ielm*" "*scheme*" "*Help*" "*Async Shell Command*" "*grep*" "*rgrep*" "*Directory*")))
+(setq-default indicate-empty-lines t) ;custom
+(setq-default pop-up-windows nil) ;custom
+(setq-default warning-suppress-types (quote ((server)))) ;custom
+(setq-default safe-local-variable-values (quote ((outline-minor-mode) (whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark)))) ;custom
+(setq-default same-window-buffer-names (quote ("*shell*" "*shell*<2>" "*shell*<2>" "*shell*<3>" "*shell*<4>" "*shell*<5>" "*mail*" "*inferior-lisp*" "*ielm*" "*scheme*" "*Help*" "*Async Shell Command*" "*grep*" "*rgrep*" "*Directory*"))) ;custom
 

@@ -85,4 +85,4 @@
 
 ;;;_ . --- custom variables ---
 
-(customize-save-variable 'org-agenda-files nil)
+(setq-default org-agenda-files nil)

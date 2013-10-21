@@ -1,3 +1,5 @@
+(require 'cl)
+
 (defun path-join (dirname filename)
   (concat (file-name-as-directory dirname) filename))
 
@@ -7,6 +9,8 @@
     (dolist (var (directory-files package-directory) out)
       (if (search package-name var)
 	  (setq out var)))
-    (path-join package-directory out)))
+    (if out
+	(path-join package-directory out)
+      nil)))
 
 (provide 'aprl-utils)

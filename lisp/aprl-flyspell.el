@@ -6,4 +6,4 @@
 
 ;;;_ . --- custom variables ---
 
-(customize-set-variable flyspell-issue-message-flag nil)
+(setq-default flyspell-issue-message-flag nil)

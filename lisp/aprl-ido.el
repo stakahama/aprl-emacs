@@ -33,9 +33,9 @@ one window."
 
 ;;;_ . custom-set-variables
 
-(customize-save-variable 'ido-enable-flex-matching t)
-(customize-save-variable 'ido-enable-last-directory-history nil)
-(customize-save-variable 'ido-max-work-directory-list 0)
-(customize-save-variable 'ido-max-work-file-list 0)
-(customize-save-variable 'ido-record-commands nil)
-(customize-save-variable 'ido-save-directory-list-file nil)
+(setq-default ido-enable-flex-matching t) ;custom
+(setq-default ido-enable-last-directory-history nil) ;custom
+(setq-default ido-max-work-directory-list 0) ;custom
+(setq-default ido-max-work-file-list 0) ;custom
+(setq-default ido-record-commands nil) ;custom
+(setq-default ido-save-directory-list-file nil) ;custom

@@ -61,12 +61,12 @@
 ;;;_ . set variables and custom variables
 
 ; http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/
-(customize-save-variable 'py-shell-switch-buffers-on-execute nil)
+(setq py-shell-switch-buffers-on-execute nil)
 (setq py-switch-buffers-on-execute-p nil)
 ; split windows
 (setq py-split-windows-on-execute-p t)
 ; try to automagically figure out indentation
-(customize-save-variable 'py-smart-indentation t)
+(setq py-smart-indentation t)
 
 ;; (customize-save-variable 'py-python-command-args 
 ;; 			 '("--pylab"))

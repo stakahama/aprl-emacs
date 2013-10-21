@@ -29,7 +29,7 @@ Some packages (or their latest versions) are not available through ELPA (even wi
 Python-mode
 ---
 
-I use `python-mode.el` (not `python.el`, also known as "Loveshack Python" that comes with emacs). You can get the latest `python-mode.el` here: https://launchpad.net/python-mode. Move the untar'ed directory to `~/.emacs.d/site-lisp/`. For instance, mine is `~/.emacs.d/site-lisp/python-mode.el-6.1.2/`. Alternatively, install from bzr:
+I use `python-mode.el` (not `python.el`, also known as "Loveshack Python" that comes with emacs). You can get the latest `python-mode.el` here: [https://launchpad.net/python-mode](https://launchpad.net/python-mode). Move the tar'ed directory to `~/.emacs.d/site-lisp/`. For instance, mine is `~/.emacs.d/site-lisp/python-mode.el-6.1.2/`. Alternatively, install from bzr:
 
 ```sh
 $ cd ~/.emacs.d/site-lisp/
@@ -38,14 +38,14 @@ $ bzr branch lp:python-mode
 
 To use ipython as your interpretor, you also need `ipython.el`, which
 you can get here:
-https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el
+[https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el](https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el). From the command line:
 
 ```sh
 $ mkdir ~/.emacs.d/site-lisp/ipython && cd ~/.emacs.d/site-lisp/ipython
 $ wget -c https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el
 ```
 
-These files will not get byte-compiled automatically with ELPA packages; they can be compiled from the command line:
+These files will not get byte-compiled automatically as with ELPA packages; they can be compiled from the command line:
 
 ```sh
 $ cd ~/.emacs.d/site-lisp
@@ -60,7 +60,7 @@ Additional reading:
 Configure
 ---
 
-Create a file called `"~/.emacs.d/aprl-local.el` with the following contents:
+Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or similar):
 
 ```common-lisp
 ;; ELPA required by several packages below
@@ -87,7 +87,7 @@ To test only this configuration, suppress loading of usual `~/.emacs` and load t
 $ emacs -q --load ~/.emacs.d/aprl-local.el &
 ```
 
-If working, call to this file from `~/.emacs`:
+If working, include a statement to load this file from `~/.emacs`. Using the command line:
 
 ```sh
 $ echo '(load "~/.emacs.d/aprl-local")' >> ~/.emacs
@@ -108,6 +108,7 @@ Some packages that may be worth considering (not in any particular order):
 - `org` (if the one that comes with emacs is outdated)
 - `color-theme` (customize colors)
 - `zenburn-theme` or `solarized-theme` (custom color themes)
+- `tangotango-theme` (custom color theme)
 - `langtool` (grammar check utility using LanguageTool, which you have to install separately)
 - `elscreen` (creates tabs to save multiple windows)
 - `sr-speedbar` (adds directory navigation column to window)
@@ -123,7 +124,6 @@ In addition, there are other packages not available on these repositories. `El-g
 - [`matlab-emacs`](http://matlab-emacs.sourceforge.net/)
 - [`igor-mode`](https://github.com/yamad/igor-mode)
 - [`folding`](http://www.emacswiki.org/emacs/FoldingMode)
-- [`color-theme-tangotango`](https://github.com/juba/color-theme-tangotango)
 
 and so on. 
 

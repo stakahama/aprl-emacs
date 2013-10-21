@@ -70,13 +70,13 @@
 ;;;_* Custom set variables
 
     ;; (customize-save-variable 'org-agenda-files nil)
-    (customize-save-variable 'org-export-latex-date-format "")
-    (customize-save-variable 'org-export-latex-image-default-option "width=20em")
+    (setq-default org-export-latex-date-format "")
+    (setq-default org-export-latex-image-default-option "width=20em")
 
 ;;;_* formatting options
     ;; primarily to remove "$" as math expression
     ;; 'matcher'.
-    (customize-save-variable 'org-format-latex-options 
+    (seq-default org-format-latex-options 
 	  '(:foreground default 
 			:background default 
 			:scale 1.0
