@@ -1,3 +1,6 @@
+;; desktop functions requires frame-restore.el
+;; http://www.emacswiki.org/emacs/frame-restore.el
+
 ;;;_* keybindings
 
 
@@ -182,7 +185,28 @@
       (kill-this-buffer)
       (delete-frame))))
 
-;;;_* myframe (from frame-restore.el)
+;;;_* desktop
+
+;;;_ . load
+(add-to-list 'load-path (aprl-search-package 'frame-restore "~/.emacs.d/site-lisp"))
+(condition-case nil
+    (progn (require 'desktop) 
+;; Automatically save and restore sessions
+	   (setq desktop-dirname             "~/.emacs.d/desktop/"
+		 desktop-base-file-name      "emacs.desktop"
+		 desktop-base-lock-name      "lock"
+		 desktop-path                (list desktop-dirname)
+		 desktop-save                t
+		 desktop-files-not-to-save   "^$" ;reload tramp paths
+		 desktop-load-locked-desktop nil)
+	   (desktop-save-mode 0)
+	   ;; (customize-set-variable 'desktop-enable t) 
+	   (require 'frame-restore)
+	   (require 'cl)
+	   (require 'winner))
+  (error nil))
+
+;;;_ . myframe (from frame-restore.el)
 
 (defun myframe-reduce (&optional arg)
   (interactive "P")

@@ -19,4 +19,4 @@
 
 ;;;_ --- custom variables ---
 
-(customize-save-variable 'ns-command-modifier (quote control))
+(setq-default ns-command-modifier (quote control))

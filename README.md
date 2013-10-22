@@ -63,15 +63,16 @@ Configure
 Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or similar):
 
 ```common-lisp
-;; ELPA required by several packages below
+;; --- ELPA required by several packages below ---
 (require 'package)
 (package-initialize) ; assuming not initialized in ~/.emacs
-;; load desired scripts
+;; --- load desired scripts ---
 (add-to-list 'load-path "~/.emacs.d/aprl/lisp")
-(load "aprl-miscsettings")
-(load "aprl-misckeybindings")
+(load "aprl-misc-settings")
+(load "aprl-misc-keybindings")
 (load "aprl-autosaves")
 (load "aprl-ido")
+(load "aprl-org")
 (load "aprl-python")
 (load "aprl-ipython")
 (load "aprl-ess")
@@ -79,6 +80,14 @@ Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or
 (load "aprl-fortran")
 (load "aprl-shell")
 (load "aprl-outline")
+;; --- extras (ST) uncomment if available ---
+;;(load "aprl-frames")
+;;(load "aprl-cua")
+;;(load "aprl-flyspell")
+;;(load "aprl-folding")
+;;(load "aprl-ns")
+;;(load "aprl-elscreen")
+;;(load "aprl-yegge")
 ```
 
 To test only this configuration, suppress loading of usual `~/.emacs` and load this file:
@@ -96,7 +105,7 @@ $ echo '(load "~/.emacs.d/aprl-local")' >> ~/.emacs
 Extend (user-specific; optional)
 ---
 
-Additional packages can be installed through ELPA (emacs-major-version >= 24) by calling `M-x package-list`. You can add melpa and marmalade repos if desired:
+Additional packages can be installed through ELPA (emacs-major-version >= 24) by calling `M-x package-list`. You can add melpa and marmalade repos if desired (note that state of marmalade packages has mixed reviews):
 
 ```common-lisp
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -125,7 +134,11 @@ In addition, there are other packages not available on these repositories. `El-g
 - [`igor-mode`](https://github.com/yamad/igor-mode)
 - [`folding`](http://www.emacswiki.org/emacs/FoldingMode)
 
-and so on. 
+and so on. Remember to byte-compile them:
+
+#+BEGIN_SRC sh
+$ emacs -q --batch -f batch-byte-compile folding/folding.el
+#+END_SRC
 
 Configuration for these additional packages can be included in `~/.emacs`, or in a separate file as set up for `~/.emacs.d/aprl-local.el`.
 

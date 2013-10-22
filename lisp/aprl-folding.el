@@ -1,5 +1,9 @@
+;; requires folding.el
+;; http://www.emacswiki.org/emacs/folding.el
+
 ;;;_* libraries
 (require 'cl)
+(add-to-list 'load-path (aprl-search-package 'folding "~/.emacs.d/site-lisp"))
 (load "folding" 'nomessage 'noerror)
 
 ;;;_* key bindings
@@ -82,6 +86,7 @@
 
 ;;;_* hooks
 (add-hook 'tex-mode-hook 'turn-on-folding-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-folding-mode)
 (add-hook 'matlab-mode-hook 'turn-on-folding-mode)
 (add-hook 'ess-mode-hook 'turn-on-folding-mode)
 (add-hook 'python-mode-hook 'turn-on-folding-mode)
