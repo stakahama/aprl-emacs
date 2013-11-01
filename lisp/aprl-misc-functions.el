@@ -1,3 +1,12 @@
+;;;_* keybindings
+
+;;;_ . rebindings
+
+(global-set-key (kbd "C-c %") 'match-paren)  
+(global-set-key (kbd "C-w") 'my-kill-region)
+
+;;;_* functions
+
 (defun kill-other-buffers ()
     "Kill all other buffers."
     ;; from stackoverflow

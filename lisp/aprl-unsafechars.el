@@ -1,3 +1,8 @@
+;;;_* --- keybindings ---
+
+(global-set-key [(shift f1)] 'find-first-non-ascii-char)
+
+;;;_* --- functions ---
 ;; http://www.emacswiki.org/emacs/FindingNonAsciiCharacters
 (defun find-first-non-ascii-char ()
   "Find the first non-ascii character from point onwards."

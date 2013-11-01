@@ -1,3 +1,8 @@
+;;;_* --- keybindings ---
+
+(global-set-key (kbd "C-x W") 'rename-file-and-buffer)
+
+;;;_* --- functions ---
 ;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."

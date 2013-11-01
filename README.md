@@ -70,6 +70,7 @@ Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or
 (add-to-list 'load-path "~/.emacs.d/aprl/lisp")
 (load "aprl-misc-settings")
 (load "aprl-misc-keybindings")
+(load "aprl-misc-functions")
 (load "aprl-autosaves")
 (load "aprl-ido")
 (load "aprl-org")
@@ -88,6 +89,8 @@ Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or
 ;;(load "aprl-ns")
 ;;(load "aprl-elscreen")
 ;;(load "aprl-yegge")
+;;(load "aprl-unfill")
+;;(load "aprl-unsafechars")
 ```
 
 To test only this configuration, suppress loading of usual `~/.emacs` and load this file:
@@ -136,9 +139,9 @@ In addition, there are other packages not available on these repositories. `El-g
 
 and so on. Remember to byte-compile them:
 
-#+BEGIN_SRC sh
+```sh
 $ emacs -q --batch -f batch-byte-compile folding/folding.el
-#+END_SRC
+```
 
 Configuration for these additional packages can be included in `~/.emacs`, or in a separate file as set up for `~/.emacs.d/aprl-local.el`.
 

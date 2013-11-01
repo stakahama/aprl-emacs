@@ -3,6 +3,7 @@
 ;;;_ . rebindings
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "M-DEL") 'backward-kill-word)
+(global-set-key (kbd "M-/") 'hippie-expand)		;; built-in
 
 ;;;_ . keybindings
 (global-set-key (kbd "C-c m") 'execute-extended-command)

@@ -4,16 +4,16 @@
 ;; (if (featurep 'python)
 ;;     (unload-feature 'python))
 
-;; enable python-mode.el from elpa
-(autoload 'python-mode "python-mode" "Python editing mode." t)
-(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
-
 ;; need to load this after autoload commands to get py-shell
 (require 'aprl-utils)
 (setq py-install-directory (aprl-search-package 'python "~/.emacs.d/site-lisp"))
 (add-to-list 'load-path py-install-directory)
-(load (path-join py-install-directory "python-mode.el"))
+(load (path-join py-install-directory "python-mode"))
+
+;; enable python-mode.el from elpa
+(autoload 'python-mode "python-mode" "Python editing mode." t)
+(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+(setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
 
 ;;_ . hook
 (add-hook 'python-mode-hook 
@@ -22,6 +22,12 @@
 	     (local-set-key (kbd "C-c C-j") 'py-execute-line)
 	     (local-set-key (kbd "C-c C-p") 'py-execute-paragraph)
 	     (local-set-key (kbd "<C-return>") 'py-execute-region)))
+
+;;;_ . treat underscore as symbol
+; http://daemianmack.com/?p=45
+;http://superuser.com/questions/542531/emacs-auto-complete-behavior-with-underscores-in-python-mode
+
+(modify-syntax-entry ?_ "_" py-mode-syntax-table)
 
 ;;_ . functions
 (defun py-mark-line ()

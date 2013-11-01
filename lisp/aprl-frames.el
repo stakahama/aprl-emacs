@@ -87,11 +87,14 @@
 
 (labels ((modify-current (arg val default)
 			 (if arg 
-			     (if (equal arg '(4)) 
+			     (if (equal arg '(4))
 				 (- val default)
-			       (+ val arg)) 
+			       (- val (* arg default)))
 			   (+ val default))))
-
+			   ;;   (if (equal arg '(4)) 
+			   ;; 	 (- val default)
+			   ;;     (+ val arg)) 
+			   ;; (+ val default))))
   (defun enlarge-frame-vertically (&optional arg)
     (interactive "P")
     (let ( (width (frame-width)) 
@@ -100,7 +103,6 @@
 	   (newval 0) )
       (setq newval (modify-current arg height default))
       (set-frame-size (window-frame (selected-window)) width newval)))
-
   (defun enlarge-frame-horizontally (&optional arg)
     (interactive "P")
     (let ( (width (frame-width)) 
