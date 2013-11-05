@@ -21,10 +21,13 @@ $ cd ~/.emacs.d/aprl
 $ emacs -Q --script aprl-install-packages-elpa.el
 ```
 
-Note that `emacs` is nominally `/usr/bin/emacs`. For os x, instead of the pre-installed version (terminal-only) I use the cocoa port of emacs, which is installed to `/Applications/Emacs.app/Contents/MacOS/Emacs`.
+Note that `emacs` is nominally `/usr/bin/emacs`. For OS X, instead of the pre-installed version (terminal-only) I use the cocoa port of emacs, which is installed to `/Applications/Emacs.app/Contents/MacOS/Emacs`. You can create an alias in `~/.bash_profile` (and remember to `source ~/.bash_profile` or start a new shell for this to take effect):
+
+```sh
+alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+```
 
 Some packages (or their latest versions) are not available through ELPA (even with additional repositories). This includes python-mode and ipython; see below.
-
 
 Python-mode
 ---
@@ -55,6 +58,7 @@ $ emacs -q --batch -l python-mode/python-mode.el -f batch-byte-compile ipython/i
 
 Additional reading:
 
+- [My notes on emacs keybindings and configuration specific to aprl-emacs](http://stakahama.github.io/resources/emacs/index.html)
 - [Emacs as a Python IDE](http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/)
 
 Configure
@@ -144,5 +148,3 @@ $ emacs -q --batch -f batch-byte-compile folding/folding.el
 ```
 
 Configuration for these additional packages can be included in `~/.emacs`, or in a separate file as set up for `~/.emacs.d/aprl-local.el`.
-
-

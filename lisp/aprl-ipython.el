@@ -1,5 +1,5 @@
 ;;_* ===== iPython =====
-(load (path-join (aprl-search-package 'ipython "~/.emacs.d/site-lisp") "ipython.el"))
+(load (path-join (aprl-search-package 'ipython "~/.emacs.d/site-lisp") "ipython"))
 ;; (require 'ipython)
 ;; (when (eq system-type 'darwin)
 ;;   (setq ipython-command "/opt/local/bin/ipython"))

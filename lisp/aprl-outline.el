@@ -53,6 +53,8 @@
 	    (local-set-key "\M-[" cm-map)))
 
 ;;;_* functions
+(require 'cl) ;; required for label()
+
 (defun outline-insert-bullet ()
   (interactive)
   (flet ((string-repeat (str n)

@@ -2,7 +2,6 @@
 ;; http://www.emacswiki.org/emacs/folding.el
 
 ;;;_* libraries
-(require 'cl)
 (add-to-list 'load-path (aprl-search-package 'folding "~/.emacs.d/site-lisp"))
 (load "folding" 'nomessage 'noerror)
 
@@ -48,6 +47,7 @@
 	    ;; (local-set-key (kbd "C-c @ S") 'folding-show-current-entry)))
 
 ;;;_* functions
+(require 'cl)
 
 (defun folding-insert-mode-mark ()
   (interactive)
