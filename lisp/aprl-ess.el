@@ -88,6 +88,7 @@ from http://old.nabble.com/cat-a-%22%5Cn%22-when-ess-eval-visibly-p-is-nil--td32
 	     (scroll-conservatively 10000)
 	     (visual-line-mode 1)))
 
+;;;_* ===== functions =====
 ;;-------------------- from my ess-hacks.el --------------------
 ;;;_* keybindings
 

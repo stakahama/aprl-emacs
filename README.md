@@ -56,6 +56,14 @@ $ emacs -q --batch --eval '(byte-recompile-directory "python-mode" 0)'
 $ emacs -q --batch -l python-mode/python-mode.el -f batch-byte-compile ipython/ipython.el
 ```
 
+To byte-compile everything in the `"~/.emacs.d/site-lisp"` directory, evaluate this expression in the scratch buffer:
+
+```common-lisp
+(let (dir)
+  (dolist (dir (cddr (directory-files "~/.emacs.d/site-lisp" t)))
+    (byte-recompile-directory dir 0)))
+```	
+
 Additional reading:
 
 - [My notes on emacs keybindings and configuration specific to aprl-emacs](http://stakahama.github.io/resources/emacs/index.html)
@@ -67,10 +75,10 @@ Configure
 Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or similar):
 
 ```common-lisp
-;; --- ELPA required by several packages below ---
+;; ELPA required by several packages below
 (require 'package)
 (package-initialize) ; assuming not initialized in ~/.emacs
-;; --- load desired scripts ---
+;; load desired scripts
 (add-to-list 'load-path "~/.emacs.d/aprl/lisp")
 (load "aprl-misc-settings")
 (load "aprl-misc-keybindings")
@@ -78,23 +86,28 @@ Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or
 (load "aprl-autosaves")
 (load "aprl-ido")
 (load "aprl-org")
-(load "aprl-python")
-(load "aprl-ipython")
-(load "aprl-ess")
-(load "aprl-auctex")
 (load "aprl-fortran")
 (load "aprl-shell")
 (load "aprl-outline")
-;; --- extras (ST) uncomment if available ---
-;;(load "aprl-frames")
-;;(load "aprl-cua")
-;;(load "aprl-flyspell")
-;;(load "aprl-folding")
-;;(load "aprl-ns")
+;; from elpa
+(load "aprl-ess")
+(load "aprl-auctex")
+;; in site-lisp
+(load "aprl-python")
+(load "aprl-ipython")
 ;;(load "aprl-elscreen")
-;;(load "aprl-yegge")
-;;(load "aprl-unfill")
-;;(load "aprl-unsafechars")
+;;(load "aprl-folding")
+;;(load "aprl-markdown")
+;; extras (ST)
+(load "aprl-frames")
+(load "aprl-frames-resizing")
+(load "aprl-buffers")
+(load "aprl-cua")
+(load "aprl-flyspell")
+(load "aprl-ns")
+(load "aprl-yegge")
+(load "aprl-unfill")
+(load "aprl-unsafechars")
 ```
 
 To test only this configuration, suppress loading of usual `~/.emacs` and load this file:

@@ -1,4 +1,4 @@
-;;_* ===== Python-mode =====
+;;;_* ===== Python-mode =====
 
 ;; disable Loveshack Python
 ;; (if (featurep 'python)
@@ -22,6 +22,15 @@
 	     (local-set-key (kbd "C-c C-j") 'py-execute-line)
 	     (local-set-key (kbd "C-c C-p") 'py-execute-paragraph)
 	     (local-set-key (kbd "<C-return>") 'py-execute-region)))
+
+
+;;;_ . for multiple *Python* buffers
+
+(defun py-set-bufname (&optional arg)
+  (interactive "P")
+  (setq py-which-bufname 
+	(format "%s<%s>" "Python" 
+		(replace-regexp-in-string "\\.py$" "" (buffer-name)))))
 
 ;;;_ . treat underscore as symbol
 ; http://daemianmack.com/?p=45
@@ -67,6 +76,7 @@
 ;;;_ . set variables and custom variables
 
 ; http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/
+;;(setq-default py-which-bufname "IPython")
 (setq py-shell-switch-buffers-on-execute nil)
 (setq py-switch-buffers-on-execute-p nil)
 ; split windows
