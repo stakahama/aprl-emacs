@@ -146,6 +146,23 @@ Some packages that may be worth considering (not in any particular order):
 - `magit` (git revision control through emacs)
 - `autopair` (pair braces)
 
+
+For instance, to install color themes (specifically, `zenburn-theme`):
+
+```common-lisp
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initailize)
+(mapc 'package-install '(color-theme zenburn-theme))
+```
+
+and the following lines can be added to your `.emacs` file (either directly or loaded from another `.el` file):
+
+```common-lisp
+(require 'color-theme)
+(color-theme-initialize)
+(load-theme 'zenburn t)
+```
+
 Further explanation on the package system described [here](http://ergoemacs.org/emacs/emacs_package_system.html "Xah Lee's guide to the package system").
 
 In addition, there are other packages not available on these repositories. `El-get` may have them (more advanced), or you may have to download them from various repositories. A partial list:
