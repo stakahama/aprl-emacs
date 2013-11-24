@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;;;_* my outline-mode conventions 
 
 ;; Using outline-mode, follow conventions of allout-mode
@@ -54,6 +56,7 @@
 
 ;;;_* functions
 (require 'cl) ;; required for label()
+(require 'cl-lib)
 
 (defun outline-insert-bullet ()
   (interactive)
@@ -67,16 +70,22 @@
 (defun generic-outline-hook (cc)
   (lexical-let* ((cstart (concat "^" cc))
 		 (cfull (concat cstart "\\(\\*\\|[ ]+[+-=>()[{}&!?#%\"X@$~_\\:;^]\\)")))
-  (labels ((my-outline-level ()
-			   (let (buffer-invisibility-spec)
-			     (save-excursion
-			       (search-forward-regexp cfull)
-			       (- (current-column) 3)))))
+    ;; (labels ((my-outline-level ()
+    ;; 			       (let (buffer-invisibility-spec)
+    ;; 				 (save-excursion
+    ;; 				   (search-forward-regexp cfull)
+    ;; 				   (- (current-column) 3)))))
     (lambda ()
       (setq outline-regexp cstart)
-      (setq outline-level 'my-outline-level)
+      ;; (setq outline-level 'my-outline-level)
+      (setq outline-level (lexical-let ((cfull cfull))
+      			    (lambda  ()
+      			      (let (buffer-invisibility-spec)
+      				(save-excursion
+      				  (search-forward-regexp cfull)
+      				  (- (current-column) 3))))))
       (outline-minor-mode t)
-      (hide-body)))))
+      (hide-body))))
 
 ;;;_* hooks
 
