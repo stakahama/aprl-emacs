@@ -56,12 +56,14 @@ $ emacs -q --batch --eval '(byte-recompile-directory "python-mode" 0)'
 $ emacs -q --batch -l python-mode/python-mode.el -f batch-byte-compile ipython/ipython.el
 ```
 
-To byte-compile everything in the `"~/.emacs.d/site-lisp"` directory, evaluate this expression in the scratch buffer:
+To byte-compile everything in the `"~/.emacs.d/site-lisp"` and/or `"~/.emacs.d/aprl/lisp"` directory, evaluate this expression in the scratch buffer (replace with appropriate directory name):
 
 ```common-lisp
-(let (dir)
-  (dolist (dir (cddr (directory-files "~/.emacs.d/site-lisp" t)))
-    (byte-recompile-directory dir 0)))
+(let ((elisp-directory "~/.emacs.d/site-lisp") x)
+  (dolist (x (cddr (directory-files elisp-directory t)))
+    (if (file-directory-p x)
+	(byte-recompile-directory x 0)
+      (byte-compile-file x))))
 ```	
 
 Additional reading:
@@ -89,6 +91,8 @@ Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or
 (load "aprl-fortran")
 (load "aprl-shell")
 (load "aprl-outline")
+;; --- packages ---
+(load "aprl-cygwin64") ;; need for cygwin64 packages
 ;; from elpa
 (load "aprl-ess")
 (load "aprl-auctex")
@@ -138,6 +142,7 @@ Some packages that may be worth considering (not in any particular order):
 - `color-theme` (customize colors)
 - `zenburn-theme` or `solarized-theme` (custom color themes)
 - `tangotango-theme` (custom color theme)
+- `markdown-mode` (markdown mode)
 - `langtool` (grammar check utility using LanguageTool, which you have to install separately)
 - `elscreen` (creates tabs to save multiple windows)
 - `sr-speedbar` (adds directory navigation column to window)
@@ -145,7 +150,6 @@ Some packages that may be worth considering (not in any particular order):
 - `nxml` (edit HTML/XML files)
 - `magit` (git revision control through emacs)
 - `autopair` (pair braces)
-
 
 For instance, to install color themes (specifically, `zenburn-theme`):
 
@@ -178,3 +182,16 @@ $ emacs -q --batch -f batch-byte-compile folding/folding.el
 ```
 
 Configuration for these additional packages can be included in `~/.emacs`, or in a separate file as set up for `~/.emacs.d/aprl-local.el`.
+
+Cygwin emacs-w32
+---
+
+Create desktop (menu) shortcut as [described here](http://emacstragic.net/installing-emacs-in-cygwin/). With some modifications,
+
+- Target: `%SystemDrive%\cygwin64\bin\run.exe /usr/bin/emacsclient -c -a /usr/bin/emacs`
+- Start in: `%SystemDrive%\cygwin64\home\%USERNAME%`
+- Icon: `%SystemDrive%\cygwin64\bin\emacs-w32.exe`
+
+Note that `%SystemDrive%` is nominally `C:`.
+
+Currently leaves `run.exe.stackdump` on desktop; doesn't seem to affect function but some suggestions for getting rid of this [here](http://stackoverflow.com/questions/4746187/why-my-emacs-in-cygwin-running-on-windows-seven-always-create-crash-dump). So far unsuccessful.
