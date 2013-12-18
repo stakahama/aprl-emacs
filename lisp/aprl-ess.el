@@ -24,6 +24,9 @@
 ;; (if (eq system-type 'darwin)
 ;;     (setq inferior-R-args "--arch x86_64"))
 
+(if (eq system-type 'cygwin)
+    (setq inferior-R-program-name "/usr/bin/R"))
+
 ;;;_ . suppress printing of sent commands for speedup
 
 (setq ess-eval-visibly-p nil) ;; from http://www.damtp.cam.ac.uk/user/sje30/ess11
