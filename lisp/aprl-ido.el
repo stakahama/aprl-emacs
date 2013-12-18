@@ -39,3 +39,4 @@ one window."
 (setq-default ido-max-work-file-list 0) ;custom
 (setq-default ido-record-commands nil) ;custom
 (setq-default ido-save-directory-list-file nil) ;custom
+(setq ido-auto-merge-work-directories-length -1) ; custom

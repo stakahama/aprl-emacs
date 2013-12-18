@@ -59,11 +59,13 @@ $ emacs -q --batch -l python-mode/python-mode.el -f batch-byte-compile ipython/i
 To byte-compile everything in the `"~/.emacs.d/site-lisp"` and/or `"~/.emacs.d/aprl/lisp"` directory, evaluate this expression in the scratch buffer (replace with appropriate directory name):
 
 ```common-lisp
-(let ((elisp-directory "~/.emacs.d/site-lisp") x)
-  (dolist (x (cddr (directory-files elisp-directory t)))
-    (if (file-directory-p x)
-	(byte-recompile-directory x 0)
-      (byte-compile-file x))))
+(let ((elisp-directory "~/.emacs.d/aprl/lisp") 
+      (filename nil))
+  (dolist (filename (cddr (directory-files elisp-directory t)))
+    (if (file-directory-p filename) ;; is directory
+	(byte-recompile-directory filename 0 t)
+      (if (equal "el" (file-name-extension filename)) ;; is not directory and is an .el file
+	  (byte-compile-file filename)))))
 ```	
 
 Additional reading:

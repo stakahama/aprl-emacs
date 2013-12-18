@@ -30,7 +30,10 @@
   (interactive "P")
   (setq py-which-bufname 
 	(format "%s<%s>" "Python" 
-		(replace-regexp-in-string "\\.py$" "" (buffer-name)))))
+		(replace-regexp-in-string "\\.py$" "" 
+					  (if arg
+					      arg
+					    (buffer-name))))))
 
 ;;;_ . treat underscore as symbol
 ; http://daemianmack.com/?p=45
