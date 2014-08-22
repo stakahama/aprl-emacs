@@ -26,7 +26,7 @@
   (lambda (&optional arg)
     (interactive "P")
     (goto-char (point-max))
-    (insert (concat "cd " (copy-pwd arg)))
+    (insert (concat "cd " (format "\"%s\"" (copy-pwd arg))))
     (eval (list send-input-fn)))))
 
 (when (eq system-type 'cygwin)

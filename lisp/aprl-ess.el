@@ -7,6 +7,7 @@
 ;;
 (require 'ess-site)
 ;; (require 'ess-eldoc)
+;; ---
 (setq-default inferior-R-args "--no-restore-history --no-save ")
 (setq ess-ask-for-ess-directory nil)
 (setq ess-local-process-name "R")
@@ -16,6 +17,7 @@
 (setq comint-scroll-to-bottom-on-output t)
 (setq comint-move-point-for-output t)
 (autoload 'ess-rdired "ess-rdired" "View R objects in a dired-like buffer." t)
+;; ---
 ;; (setq-default ess-default-style 'C++)
 ;; (setq inferior-ess-r-help-command "utils::help(\"%s\", help_type=\"html\")\n") 
 
@@ -24,8 +26,9 @@
 ;; (if (eq system-type 'darwin)
 ;;     (setq inferior-R-args "--arch x86_64"))
 
-(if (eq system-type 'cygwin)
-    (setq inferior-R-program-name "/usr/bin/R"))
+;; (if (or (eq system-type 'cygwin)
+;; 	(eq system-type 'darwin))
+;;     (setq inferior-R-program-name "/usr/bin/R"))
 
 ;;;_ . suppress printing of sent commands for speedup
 

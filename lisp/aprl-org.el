@@ -1,6 +1,8 @@
 ;;;_* ===== org-mode =====
 
 ;; (when (require 'org nil 'noerror);previously: (require 'org-mode nil 'noerror)
+;; (add-to-list 'load-path (aprl-search-package 'org "~/.emacs.d/site-lisp"))
+(add-to-list 'load-path (aprl-search-package 'org "~/.emacs.d/elpa"))
 (require 'org-install)
 (require 'org-latex)
 ;; The following lines are always needed.  Choose your own keys.

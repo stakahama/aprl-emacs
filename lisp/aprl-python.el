@@ -4,6 +4,14 @@
 ;; (if (featurep 'python)
 ;;     (unload-feature 'python))
 
+;; setq:
+;; py-python-command
+;; py-python-command-args
+
+;; from ipython.el
+;; py-which-shell
+;; py-shell-name 
+
 ;; need to load this after autoload commands to get py-shell
 (require 'aprl-utils)
 (setq py-install-directory (aprl-search-package 'python "~/.emacs.d/site-lisp"))
