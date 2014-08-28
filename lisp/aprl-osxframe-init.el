@@ -1,0 +1,6 @@
+(modify-frame-parameters nil '((wait-for-wm . nil)))
+(add-to-list 'initial-frame-alist '(left . 55))
+(add-to-list 'initial-frame-alist '(top . 0))
+(add-to-list 'default-frame-alist '(width . 80))
+(add-to-list 'default-frame-alist '(height . 50))
+(add-to-list 'default-frame-alist '(cursor-type . box))
