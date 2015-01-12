@@ -2,6 +2,7 @@
 
 ;; (when (require 'org nil 'noerror);previously: (require 'org-mode nil 'noerror)
 ;; (add-to-list 'load-path (aprl-search-package 'org "~/.emacs.d/site-lisp"))
+(require 'aprl-utils)
 (add-to-list 'load-path (aprl-search-package 'org "~/.emacs.d/elpa"))
 (require 'org-install)
 (require 'org-latex)
