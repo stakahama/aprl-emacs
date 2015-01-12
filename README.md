@@ -59,13 +59,13 @@ Create a file called `"~/.emacs.d/aprl-local.el` with the following contents (or
 (load "aprl-ess")
 (load "aprl-auctex")
 ;; in site-lisp
-(load "aprl-python")
-(load "aprl-ipython")
+;;(load "aprl-python")
+;;(load "aprl-ipython")
 ;;(load "aprl-elscreen")
 ;;(load "aprl-folding")
 ;;(load "aprl-markdown")
 ;; extras (ST)
-(load "aprl-frames")
+;;(load "aprl-frames")
 (load "aprl-frames-resizing")
 (load "aprl-buffers")
 (load "aprl-cua")
@@ -91,34 +91,29 @@ $ echo '(load "~/.emacs.d/aprl-local")' >> ~/.emacs
 Python-mode
 ---
 
-I use `python-mode.el` (not `python.el`, also known as "Loveshack Python" that comes with emacs). You can get the latest `python-mode.el` here: [https://launchpad.net/python-mode](https://launchpad.net/python-mode). Move the tar'ed directory to `~/.emacs.d/site-lisp/`. For instance, mine is `~/.emacs.d/site-lisp/python-mode.el-6.1.2/`. Alternatively, install from bzr:
+I use `python-mode.el` (not `python.el`, also known as "Loveshack Python" that comes with emacs). You can get the latest `python-mode.el` here: [https://launchpad.net/python-mode](https://launchpad.net/python-mode). Move the tar'ed directory to `~/.emacs.d/site-lisp/`. For instance, mine is `~/.emacs.d/site-lisp/python-mode.el-6.1.2/`. Alternatively, install from bzr and bytecompile:
 
 ```sh
+$ mkdir ~/.emacs/site-lisp
 $ cd ~/.emacs.d/site-lisp/
 $ bzr branch lp:python-mode
+$ emacs -Q--batch --eval '(byte-recompile-directory "python-mode" 0)'
 ```
 
-To use ipython as your interpretor, you also need `ipython.el`, which
+[Optional] To use ipython as your interpretor, you also need `ipython.el`, which
 you can get here:
 [https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el](https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el). From the command line:
 
 ```sh
 $ mkdir ~/.emacs.d/site-lisp/ipython && cd ~/.emacs.d/site-lisp/ipython
 $ wget -c https://raw.github.com/ipython/ipython/master/docs/emacs/ipython.el
-```
-
-These files will not get byte-compiled automatically as with ELPA packages; they can be compiled from the command line:
-
-```sh
-$ cd ~/.emacs.d/site-lisp
-$ emacs -Q--batch --eval '(byte-recompile-directory "python-mode" 0)'
-$ emacs -Q --batch -l python-mode/python-mode.el -f batch-byte-compile ipython/ipython.el
+$ emacs -Q --batch -l python-mode/python-mode.el -f batch-byte-compile ipython.el
 ```
 
 Byte-compiling
 ---
 
-To byte-compile everything in the `"~/.emacs.d/site-lisp"` and/or `"~/.emacs.d/aprl/lisp"` directory, evaluate this expression in the scratch buffer (replace with appropriate directory name):
+To byte-compile everything in the `"~/.emacs.d/aprl/lisp"` (and/or `"~/.emacs.d/site-lisp"`) directory, evaluate this expression in the scratch buffer (replace with appropriate directory name):
 
 ```common-lisp
 (let ((elisp-directory "~/.emacs.d/aprl/lisp") 

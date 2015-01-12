@@ -47,7 +47,8 @@
 ; http://daemianmack.com/?p=45
 ;http://superuser.com/questions/542531/emacs-auto-complete-behavior-with-underscores-in-python-mode
 
-(modify-syntax-entry ?_ "_" py-mode-syntax-table)
+(if (boundp 'py-mode-syntax-table)
+    (modify-syntax-entry ?_ "_" py-mode-syntax-table))
 
 ;;_ . functions
 (defun py-mark-line ()
