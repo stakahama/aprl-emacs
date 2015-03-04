@@ -74,15 +74,22 @@
 
 (defun sizetw (&optional width height)
   (interactive)
-  (flet ((getparm (symbol) 
-		  (let (value)
-		    (dolist (elem default-frame-alist value)
-		      (if (eq (car elem) symbol)
-			  (setq value (cdr elem)))))))
+  ;; (flet ((getparm (symbol) 
+  ;; 		  (let (value)
+  ;; 		    (dolist (elem default-frame-alist value)
+  ;; 		      (if (eq (car elem) symbol)
+  ;; 			  (setq value (cdr elem)))))))
+  (flet ((getparm (symbol) ; use property of associative list
+		  (cdr (assoc symbol default-frame-alist))))
     (if (and width height)
 	(set-frame-size (window-frame (selected-window)) width height)
       (set-frame-size (window-frame (selected-window)) 
 		      (getparm 'width) (getparm 'height)))))
+
+;; --- default size ---
+;; (let ((height (cdr (cadr default-frame-alist)))
+;;       (width  (cdr (caddr default-frame-alist))))
+;;   (set-frame-size (selected-frame) width height))
 
 
 (labels ((modify-current (arg val default)
