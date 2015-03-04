@@ -61,7 +61,7 @@
 		org-export-latex-date-format
 		org-export-latex-image-default-option
 		org-export-latex-classes)))
-    (mapcar (lambda (x) (cons x (eval x))) vars)))
+    (mapcar (lambda (x) (cons x (if (boundp x) (eval x) nil))) vars)))
 
 (defun org-restore-defaults (default-vars)
   (interactive)
