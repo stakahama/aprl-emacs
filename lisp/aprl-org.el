@@ -2,10 +2,12 @@
 
 ;; (when (require 'org nil 'noerror);previously: (require 'org-mode nil 'noerror)
 ;; (add-to-list 'load-path (aprl-search-package 'org "~/.emacs.d/site-lisp"))
-(require 'aprl-utils)
 (add-to-list 'load-path (aprl-search-package 'org "~/.emacs.d/elpa"))
+
 (require 'org-install)
-(require 'org-latex)
+(condition-case nil
+    (require 'org-latex)
+  (error nil))
 ;; The following lines are always needed.  Choose your own keys.
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-c8" 'org-store-link)	;"\C-cl"
