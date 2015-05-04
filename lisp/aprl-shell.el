@@ -17,17 +17,21 @@
   (lexical-let (send-input-fn)
     (setq arg (if arg arg major-mode))
     (setq send-input-fn
-	  (if (eq arg 'shell-mode)
-	      'comint-send-input
-	    (if (eq arg 'eshell-mode)
-		'eshell-send-input
-	      (if (eq arg 'term-mode)
-		  'term-send-input))))
-  (lambda (&optional arg)
-    (interactive "P")
-    (goto-char (point-max))
-    (insert (concat "cd " (format "\"%s\"" (copy-pwd arg))))
-    (eval (list send-input-fn)))))
+	  (cond ((eq arg 'shell-mode) 'comint-send-input)
+	  	((eq arg 'eshell-mode) 'eshell-send-input)
+	  	((eq arg 'term-mode) 'term-send-input)))
+    (lambda (&optional arg)
+      (interactive "P")
+      (goto-char (point-max))
+      (flet ((addquotes (x)
+			(cond ((string-match "[ ]+" x) (format "\"%s\"" x))
+			      (t x))))
+	(let ((pathsep "/"))
+	  (insert (concat "cd "
+			  (mapconcat 'addquotes
+				     (split-string (copy-pwd arg) pathsep)
+				     pathsep)))))
+      (eval (list send-input-fn)))))
 
 (when (eq system-type 'cygwin)
   (defun cygwin-shell ()

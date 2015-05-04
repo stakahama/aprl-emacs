@@ -217,6 +217,8 @@
 
 ;;;_ . myframe (from frame-restore.el)
 
+(require 'frame-restore)
+
 (defun myframe-reduce (&optional arg)
   (interactive "P")
   (if (not (boundp 'desktop-globals-to-save))
