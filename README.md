@@ -147,6 +147,7 @@ Some packages that may be worth considering (not in any particular order):
 - `zenburn-theme` or `solarized-theme` (custom color themes)
 - `tangotango-theme` (custom color theme)
 - `markdown-mode` (markdown mode)
+- `polymode` (for R markdown)
 - `langtool` (grammar check utility using LanguageTool, which you have to install separately)
 - `elscreen` (creates tabs to save multiple windows)
 - `sr-speedbar` (adds directory navigation column to window)
@@ -154,6 +155,8 @@ Some packages that may be worth considering (not in any particular order):
 - `nxml` (edit HTML/XML files)
 - `magit` (git revision control through emacs)
 - `autopair` (pair braces)
+- `sublimity` (for features like minimap from Sublime Text)
+- `evil` (Vim emulation)
 
 For instance, to install color themes (specifically, `zenburn-theme`):
 
@@ -170,6 +173,8 @@ and the following lines can be added to your `.emacs` file (either directly or l
 (color-theme-initialize)
 (load-theme 'zenburn t)
 ```
+
+*Note that use of [`deftheme`](http://batsov.com/articles/2012/02/19/color-theming-in-emacs-reloaded/) is preferred over `color-theme` for managing colors since Emacs 24*.
 
 Further explanation on the package system described [here](http://ergoemacs.org/emacs/emacs_package_system.html "Xah Lee's guide to the package system").
 
