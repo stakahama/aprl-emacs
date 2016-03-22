@@ -1,26 +1,29 @@
 ;;;_* ===== libraries =====
 
 (require 'cl)
-(require 'find-lisp)
 
 ;;;_* ===== settings =====
 
+;;;_ . selection
 (if (< emacs-major-version 23)
     (transient-mark-mode t))
 (setq delete-active-region nil)
 (delete-selection-mode -1)
-(normal-erase-is-backspace-mode 0)
+(global-font-lock-mode t)		; syntax highlighting
+
+;;;_ . visual
 (show-paren-mode 1)
 (setq ring-bell-function 'ignore)
 (blink-cursor-mode -1)
 (setq inhibit-splash-screen t)
 (setq line-number-mode t)
 (setq column-number-mode t)
-(mouse-wheel-mode t)			; activate mouse scrolling
-(global-font-lock-mode t)		; syntax highlighting
 (tool-bar-mode -1)
 (setq initial-scratch-message nil)
-;; (setq initial-scratch-message nil)
+
+;;;_ . behavior
+(normal-erase-is-backspace-mode 0)
+(mouse-wheel-mode t)			; activate mouse scrolling
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; (setq show-paren-delay 0.0)
 ;; (setq visible-bell t)
@@ -29,6 +32,10 @@
   ;; make emacs use the clipboard
   (setq x-select-enable-clipboard t)
   (setq interprogram-paste-function 'x-cut-buffer-or-selection-value))
+
+;;;_* ===== find-lisp =====
+
+(require 'find-lisp)
 
 ;;;_* ===== search highlight =====
 (setq search-highlight           t) ; Highlight search object
@@ -47,6 +54,7 @@
 
 ;;;_ . --- dired customizations ---
 (setq dired-listing-switches "-alhF")
+(setq delete-by-moving-to-trash t)
 
 ;;;_ . --- use ls-lisp on OS X and Windows ---
 (when (or (eq system-type 'darwin))
