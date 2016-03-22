@@ -5,8 +5,8 @@
 (add-hook 'LaTeX-mode-hook 
 	  (lambda ()
 	    (let* ((pdfviewer "Preview")
-		   (view-command '("View" 
-				   (format "open -a \"%s\" %%s.pdf" pdfviewer)
+		   (view-command `("View" 
+				   ,(format "open -a \"%s\" %%s.pdf" pdfviewer)
 				   TeX-run-discard-or-function t t 
 				   :help "Run Viewer")))
 	      (setq-default TeX-master nil)
