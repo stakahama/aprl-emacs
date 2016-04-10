@@ -182,6 +182,7 @@ Some packages that may be worth considering (not in any particular order):
 - `autopair` (pair braces)
 - `sublimity` (for features like minimap from Sublime Text)
 - `evil` (Vim emulation)
+- `YASnippet` (templates)
 
 In addition, there are other packages not available on these repositories. `el-get` may have them (more advanced), or you may have to download them from various repositories. A partial list:
 
@@ -189,7 +190,6 @@ In addition, there are other packages not available on these repositories. `el-g
 - [`igor-mode`](https://github.com/yamad/igor-mode)
 - [`folding`](http://www.emacswiki.org/emacs/FoldingMode)
 - [`yaml-mode`](https://www.emacswiki.org/emacs/YamlMode)
-
 
 and so on. Remember to byte-compile them. For example:
 
@@ -219,7 +219,6 @@ My `settings-local.el` contains many additional configurations:
 ;;
 (setenv "PATH" (concat "/anaconda/bin:/opt/local/bin:" (getenv "PATH") ))
 (setq exec-path (append '("/anaconda/bin") exec-path))
-(setenv "EPFL" "~/Documents/Work/EPFL")
 ;;
 ;; -----------------------------------------------------------------------------
 ;; Font
@@ -288,7 +287,7 @@ My `settings-local.el` contains many additional configurations:
 (add-to-list 'auto-mode-alist '("\\.Rmd\\'" . rmd-mode))
 ;; AUCTEX
 ;;
-;; (load "aprl-auctex-2")
+(load "aprl-auctex-2")
 ;;
 ;; -----------------------------------------------------------------------------
 ;; For evil-mode (experimenting)

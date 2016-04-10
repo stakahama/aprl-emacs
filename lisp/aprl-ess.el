@@ -1,4 +1,26 @@
+
+;;------------------------------------------------------------------------------
+;;
+;;    This file is part of aprl-emacs.
+;;    
+;;    aprl-emacs is free software: you can redistribute it and/or modify
+;;    it under the terms of the GNU General Public License as published by
+;;    the Free Software Foundation, either version 3 of the License, or
+;;    (at your option) any later version.
+;;    
+;;    aprl-emacs is distributed in the hope that it will be useful,
+;;    but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;    GNU General Public License for more details.
+;;    
+;;    You should have received a copy of the GNU General Public License
+;;    along with aprl-emacs.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;------------------------------------------------------------------------------
+
+
 ;;;_* ===== R/ESS =====
+
 ;; (when (file-exists-p (aprl-package-alias "ess"))
 ;;   (add-to-list 'load-path (concat (aprl-package-alias "ess") "/lisp"))
 ;; (global-set-key (kbd "C-c R") 'my-start-R-ESS);'my-ess-start-R)
@@ -35,25 +57,25 @@
 (setq ess-eval-visibly-p nil) ;; from http://www.damtp.cam.ac.uk/user/sje30/ess11
 ;; (setq ess-eval-visibly-p t)
 
-(if (and nil (not ess-eval-visibly-p))
-    (defun inferior-ess-output-filter (proc string)
-      "print newline after each evaluation when ess-eval-visibly-p is true
-if you are not using ess-tracebug. Works only with R
-from http://old.nabble.com/cat-a-%22%5Cn%22-when-ess-eval-visibly-p-is-nil--td32684429.html"
-      (let ((pbuf (process-buffer proc))
-	    (pmark (process-mark proc))
-	    (prompt-regexp "^>\\( [>+]\\)*\\( \\)$")
-	    (prompt-replace-regexp "^>\\( [>+]\\)*\\( \\)[^>+\n]"))
-	(setq string (replace-regexp-in-string prompt-replace-regexp " \n"
-					       string nil nil 2))
-	(with-current-buffer pbuf
-	  (goto-char pmark)
-	  (beginning-of-line)
-	  (when (looking-at prompt-regexp)
-	    (goto-char pmark)
-	    (insert "\n")
-	    (set-marker pmark (point)))))
-      (comint-output-filter proc (inferior-ess-strip-ctrl-g string))))
+;; ;; (if (and nil (not ess-eval-visibly-p))
+;; ;;     (defun inferior-ess-output-filter (proc string)
+;; ;;       "print newline after each evaluation when ess-eval-visibly-p is true
+;; ;; if you are not using ess-tracebug. Works only with R
+;; ;; from http://old.nabble.com/cat-a-%22%5Cn%22-when-ess-eval-visibly-p-is-nil--td32684429.html"
+;; ;;       (let ((pbuf (process-buffer proc))
+;; ;; 	    (pmark (process-mark proc))
+;; ;; 	    (prompt-regexp "^>\\( [>+]\\)*\\( \\)$")
+;; ;; 	    (prompt-replace-regexp "^>\\( [>+]\\)*\\( \\)[^>+\n]"))
+;; ;; 	(setq string (replace-regexp-in-string prompt-replace-regexp " \n"
+;; ;; 					       string nil nil 2))
+;; ;; 	(with-current-buffer pbuf
+;; ;; 	  (goto-char pmark)
+;; ;; 	  (beginning-of-line)
+;; ;; 	  (when (looking-at prompt-regexp)
+;; ;; 	    (goto-char pmark)
+;; ;; 	    (insert "\n")
+;; ;; 	    (set-marker pmark (point)))))
+;; ;;       (comint-output-filter proc (inferior-ess-strip-ctrl-g string))))
 
 ;;;_ . hooks
 
