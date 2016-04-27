@@ -2,17 +2,17 @@
 ;;------------------------------------------------------------------------------
 ;;
 ;;    This file is part of aprl-emacs.
-;;    
+;;
 ;;    aprl-emacs is free software: you can redistribute it and/or modify
 ;;    it under the terms of the GNU General Public License as published by
 ;;    the Free Software Foundation, either version 3 of the License, or
 ;;    (at your option) any later version.
-;;    
+;;
 ;;    aprl-emacs is distributed in the hope that it will be useful,
 ;;    but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;;    GNU General Public License for more details.
-;;    
+;;
 ;;    You should have received a copy of the GNU General Public License
 ;;    along with aprl-emacs.  If not, see <http://www.gnu.org/licenses/>.
 ;;
@@ -30,7 +30,8 @@
 (require 'ess-site)
 ;; (require 'ess-eldoc)
 ;; ---
-(setq-default inferior-R-args "--no-restore-history --no-save ")
+(setq-default inferior-R-args "--no-restore-history --no-save")
+(setq ess-history-file nil)
 (setq ess-ask-for-ess-directory nil)
 (setq ess-local-process-name "R")
 (setq ansi-color-for-comint-mode 'filter)
@@ -39,12 +40,24 @@
 (setq comint-scroll-to-bottom-on-output t)
 (setq comint-move-point-for-output t)
 (autoload 'ess-rdired "ess-rdired" "View R objects in a dired-like buffer." t)
+
 ;; ---
+;; (setq inferior-ess-r-help-command "utils::help(\"%s\", help_type=\"html\")\n")
+
+;; ---
+;; (setq ess-default-style 'DEFAULT)
 ;; (setq-default ess-default-style 'C++)
-;; (setq inferior-ess-r-help-command "utils::help(\"%s\", help_type=\"html\")\n") 
+;; (setf ess-arg-function-offset nil)
+;; (setf ess-indent-offset 2)
+;; (add-to-list 'ess-style-alist '(ess-indent-offset . 2)) ;; shadow '(ess-indent-offset . 4)
 
-(setq ess-default-style 'DEFAULT)
 
+(add-hook 'ess-mode-hook
+	  '(lambda ()
+	     (ess-set-style 'C++ 'quiet)
+	     (setf ess-indent-offset 2)))
+
+;; ---
 ;; (if (eq system-type 'darwin)
 ;;     (setq inferior-R-args "--arch x86_64"))
 
@@ -111,8 +124,8 @@
 			   TeX-run-TeX nil (latex-mode) :help "Run Latex after Sweave") t)
 	    (setq TeX-command-default "Sweave")))
 
-(add-hook 'noweb-minor-mode-hook 
-	  '(lambda () 
+(add-hook 'noweb-minor-mode-hook
+	  '(lambda ()
 	     (scroll-conservatively 10000)
 	     (visual-line-mode 1)))
 
@@ -133,7 +146,7 @@
 
 (defadvice ess-eval-region
   (after ess-eval-region-deactivate-mark activate)
-  "Deactivate mark after executing region 
+  "Deactivate mark after executing region
    (region is preserved after mark is deactivated)"
   (deactivate-mark))
 
@@ -156,32 +169,32 @@
 			 (save-excursion
 			   (set-buffer buf)
 			   (eval var)))
-	 (find-matching-inferior-r (this-buffer) 
+	 (find-matching-inferior-r (this-buffer)
 				   ;; return matching inferior R buffer name
 				   (let (buflist pattern bufname x)
 				     (setq buflist (reverse (buffer-list)))
-				     (if (setq pattern 
-					       (get-buffer-var this-buffer 
+				     (if (setq pattern
+					       (get-buffer-var this-buffer
 							       'ess-local-process-name))
 					 ;; ess local process exists
 					 ;; match based on process
 					 (dolist (x buflist bufname)
 					   (if (and (equal pattern
 							   (get-buffer-var x 'ess-local-process-name))
-						    (equal 'inferior-ess-mode 
+						    (equal 'inferior-ess-mode
 							   (get-buffer-var x 'major-mode)))
 					       (setq bufname (buffer-name x))))
 				       ;; else: match based on name
 				       ;; e.g., file is reopened and ess local process is nil
 				       (progn
 					 (setq pattern
-					       (format "\\*R[:0-9]*\\*<%s>" 
+					       (format "\\*R[:0-9]*\\*<%s>"
 						       (file-name-sans-extension this-buffer)))
 					 (let (tmp)
 					   (dolist (x buflist bufname)
 					     (setq tmp (buffer-name x))
 					     (if (and (string-match pattern tmp)
-						      (equal 'inferior-ess-mode 
+						      (equal 'inferior-ess-mode
 							     (get-buffer-var x 'major-mode)))
 						 (setq bufname tmp))))))))
 	 (is-wide-p (thres)
@@ -192,9 +205,9 @@
 	  (r-inferior-buffer nil)
 	  (maxwidth 160))
       ;; function body:
-      (setq r-inferior-buffer (find-matching-inferior-r this-buffer))      
+      (setq r-inferior-buffer (find-matching-inferior-r this-buffer))
       ;; delete other windows
-      (if (is-wide-p maxwidth) 
+      (if (is-wide-p maxwidth)
 	  (delete-other-windows)
 	(condition-case nil
 	    (delete-other-windows-vertically)
@@ -207,7 +220,7 @@
 	    (setq r-proc ess-local-process-name)
 	    (setq r-inferior-buffer
 		  (format "*%s*<%s>"  r-proc
-			  (file-name-sans-extension 
+			  (file-name-sans-extension
 			   this-buffer)))
 	    (rename-buffer r-inferior-buffer))
 	;; else: switch to current R process
@@ -230,7 +243,7 @@
 
 (defun ess-setwd ()
   (interactive)
-  (ess-eval-linewise (format "setwd(\"%s\")" 
+  (ess-eval-linewise (format "setwd(\"%s\")"
 			     (file-name-directory (buffer-file-name)))
 		     nil nil nil 'wait))
 
@@ -239,7 +252,7 @@
   (interactive "P")
   (let ((iESS-buffer-name (buffer-name)))
     (if (string-match "\\*R" iESS-buffer-name)
-	(rename-buffer 
+	(rename-buffer
 	 (replace-regexp-in-string "<.+>" "" "*R*<read2_2011-05>"))
       (message "Not iESS buffer"))))
 
@@ -254,7 +267,7 @@
 	 (get-rproc (x) (get-buffer-var x 'ess-local-process-name))
 	 (matchfn (rproc)
 		  (lexical-let ((rproc rproc))
-		    (lambda (x) 
+		    (lambda (x)
 		      (and (equal 'ess-mode (get-mode x))
 			   (equal rproc (get-rproc x)))))))
     (if (equal 'inferior-ess-mode (get-mode (buffer-name)))
@@ -286,27 +299,27 @@
     (ess-eval-linewise (format "%s(\"%s\")" ess-fn fn-name)
 		       nil nil nil 'wait)))
 
-(defun ess-seek-help () 
+(defun ess-seek-help ()
   (interactive)
   (ess-send-to-function ".help.ESS"))
-(defun ess-seek-args () 
+(defun ess-seek-args ()
   (interactive)
   (ess-send-to-function "args"))
 
 (defun ess-op-fig (&optional arg)
   "possibly rewrite r-expression as R function to load in .Rprofile"
   (interactive "P")
-  (flet ((searchback (dev) 
+  (flet ((searchback (dev)
 		     (save-excursion ;; point after dev.off()
 		       (if (search-backward-regexp (format "^[ ]*\\(%s(.+[)|\n]\\)" dev) nil t)
 			   (match-string-no-properties 1)
 			 nil)))
-	 (strip-newlines (line)  
+	 (strip-newlines (line)
 			 (replace-regexp-in-string "\n" "" line))
 	 (check-lastchar (line)      ;; need in case entire expression is not matched
 			 (let* ((nchar-1 (- (length line) 1))
 				(lastchar (substring line nchar-1)))
-			   (if (equal lastchar ",") 
+			   (if (equal lastchar ",")
 			       (concat (substring line 0 nchar-1) ")")
 			     line))))
     (let ((devices '("pdf" "png" "trellice.device" "dev.copy" "bmp" "jpeg" "tiff" "gif"))
@@ -314,7 +327,7 @@
 	  (r-expression "with(list(exec=\"%s\",textline='%s'),{expr <- parse(text=textline)[[1]]; filename <- if( !is.null(expr$file) ) expr$file else {for(e in as.list(expr)) if(is.character(e)&&grepl(\"%s\",e)||is.call(e)&&any(sapply(e[1:2],`==`,quote(sprintf)))) break; e}; if(is.call(filename)) filename <- eval(filename); if(file.exists(filename)) system(paste(exec,filename)) else \"no match\"})")
 	  exec matched-expression)
       (setq exec (if arg "~/bin/compresspdf"
-		   (if (eq system-type 'darwin) "open -a \\\"Preview\\\"" 
+		   (if (eq system-type 'darwin) "open -a \\\"Preview\\\""
 		     (if (eq system-type 'gnu/linux) "gnome-open"))))
       (setq matched-expression
 	    (let (x tmp out)
@@ -350,7 +363,7 @@
 		(search-forward "\"")
 		(setq pos2 (point))
 		(buffer-substring-no-properties pos1 pos2)))))
-    (setq pdf-file (replace-regexp-in-string "\"?\\([^\"]+\\)\"?" 
+    (setq pdf-file (replace-regexp-in-string "\"?\\([^\"]+\\)\"?"
 					     "\\1" pdf-file))
     (if (string-match "\\.pdf$" pdf-file)
 	(funcall fn pdf-file)
@@ -371,7 +384,7 @@
 	    (save-excursion
 	      (set-buffer "*Shell Command Output*")
 	      (search-backward "error" () t)))
-      (if haserror 
+      (if haserror
 	  (if (file-exists-p tmpfile)
 	      (delete-file tmpfile nil))
 	(rename-file tmpfile filename t))
