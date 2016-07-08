@@ -2,17 +2,17 @@
 ;;------------------------------------------------------------------------------
 ;;
 ;;    This file is part of aprl-emacs.
-;;    
+;;
 ;;    aprl-emacs is free software: you can redistribute it and/or modify
 ;;    it under the terms of the GNU General Public License as published by
 ;;    the Free Software Foundation, either version 3 of the License, or
 ;;    (at your option) any later version.
-;;    
+;;
 ;;    aprl-emacs is distributed in the hope that it will be useful,
 ;;    but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;;    GNU General Public License for more details.
-;;    
+;;
 ;;    You should have received a copy of the GNU General Public License
 ;;    along with aprl-emacs.  If not, see <http://www.gnu.org/licenses/>.
 ;;
@@ -32,13 +32,13 @@
 
 ;; from ipython.el
 ;; py-which-shell
-;; py-shell-name 
+;; py-shell-name
 
 ;; need to load this after autoload commands to get py-shell
 (require 'aprl-utils)
 (setq py-install-directory (aprl-search-package 'python "~/.emacs.d/site-lisp"))
 (add-to-list 'load-path py-install-directory)
-(load (path-join py-install-directory "python-mode"))
+(load (aprl-path-join py-install-directory "python-mode"))
 
 ;; enable python-mode.el from elpa
 (autoload 'python-mode "python-mode" "Python editing mode." t)
@@ -46,8 +46,8 @@
 (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
 
 ;;_ . hook
-(add-hook 'python-mode-hook 
-	  '(lambda () 
+(add-hook 'python-mode-hook
+	  '(lambda ()
 	     (local-set-key (kbd "C-c z") 'py-oschdir)
 	     (local-set-key (kbd "C-c C-j") 'py-execute-line)
 	     (local-set-key (kbd "C-c C-p") 'py-execute-paragraph)
@@ -58,9 +58,9 @@
 
 (defun py-set-bufname (&optional arg)
   (interactive "P")
-  (setq py-which-bufname 
-	(format "%s<%s>" "Python" 
-		(replace-regexp-in-string "\\.py$" "" 
+  (setq py-which-bufname
+	(format "%s<%s>" "Python"
+		(replace-regexp-in-string "\\.py$" ""
 					  (if arg
 					      arg
 					    (buffer-name))))))
@@ -100,7 +100,7 @@
   (forward-paragraph)) ;; appended 15/08/2012
 (defun py-oschdir ()
   (interactive)
-  (let ((txt (format "import os; os.chdir(\"%s\")" 
+  (let ((txt (format "import os; os.chdir(\"%s\")"
 		     (file-name-directory (buffer-file-name)))))
     (save-window-excursion
       (with-temp-buffer
@@ -118,7 +118,7 @@
 ; try to automagically figure out indentation
 (setq py-smart-indentation t)
 
-;; (customize-save-variable 'py-python-command-args 
+;; (customize-save-variable 'py-python-command-args
 ;; 			 '("--pylab"))
 ;; (customize-save-variable 'py-python-command-args
 ;; 			 '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
