@@ -20,6 +20,7 @@
 
 
 (require 'cl)
+(require 'cl-lib)
 
 
 (defun aprl-path-join (dirname filename)
