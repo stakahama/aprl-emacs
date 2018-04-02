@@ -80,11 +80,13 @@
   (beginning-of-line)
   (exchange-point-and-mark)
   (py-keep-region-active))
+
 (defun py-execute-line (&optional async)
   (interactive "P")
   (save-excursion
     (py-mark-line)
     (py-execute-region (mark) (point) async)))
+
 (defun py-mark-paragraph ()
   (interactive)
   (forward-paragraph)
@@ -92,12 +94,14 @@
   (backward-paragraph)
   (exchange-point-and-mark)
   (py-keep-region-active))
+
 (defun py-execute-paragraph (&optional async)
   (interactive "P")
   (save-excursion
     (py-mark-paragraph)
     (py-execute-region (mark) (point) async))
   (forward-paragraph)) ;; appended 15/08/2012
+
 (defun py-oschdir ()
   (interactive)
   (let ((txt (format "import os; os.chdir(\"%s\")"

@@ -22,3 +22,8 @@
 ;; (package-initialize)
 
 (elpy-enable)
+
+(with-eval-after-load 'elpy (remove-hook 'elpy-modules 'elpy-module-flymake))
+
+;; (define-key elpy-mode-map (kbd "<C-return>") 'elpy-shell-send-current-statement)
+(define-key elpy-mode-map (kbd "C-c C-j") 'elpy-shell-send-current-statement)

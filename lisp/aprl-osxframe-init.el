@@ -26,3 +26,6 @@
 (add-to-list 'default-frame-alist '(width . 80))
 (add-to-list 'default-frame-alist '(height . 50))
 (add-to-list 'default-frame-alist '(cursor-type . box))
+
+(setq split-width-threshold nil)
+(setq split-height-threshold nil)

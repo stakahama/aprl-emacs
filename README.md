@@ -29,8 +29,17 @@ Some packages (or their latest versions) are not available through ELPA (even wi
 
 ### Python-mode
 
+**Elpy**
 
-I use `python-mode.el` (not `python.el`, also known as "Loveshack Python" that comes with emacs). You can get the latest `python-mode.el` here: [https://launchpad.net/python-mode](https://launchpad.net/python-mode). Move the tar'ed directory to `~/.emacs.d/site-lisp/`. For instance, mine is `~/.emacs.d/site-lisp/python-mode.el-6.1.2/`. Alternatively, install from bzr and bytecompile:
+**UPDATE** 2017: Elpy is now recommended [`elpy.el`](https://elpy.readthedocs.io/en/latest/index.html) so the text below regarding `python-mode.el` is outdated. With elpy, I have flymake removed so the PEP8 syntax checking is disabled. This is generally not recommeded except past python files can be difficult to read on account of nonconformity warnings.
+
+```emacs-lisp
+(with-eval-after-load 'elpy (remove-hook 'elpy-modules 'elpy-module-flymake))
+```
+
+**Python-model.el (deprecated)**
+
+This is regarding `python-mode.el` (not `python.el`, also known as "Loveshack Python" that comes with emacs). You can get the latest `python-mode.el` here: [https://launchpad.net/python-mode](https://launchpad.net/python-mode). Move the tar'ed directory to `~/.emacs.d/site-lisp/`. For instance, mine is `~/.emacs.d/site-lisp/python-mode.el-6.1.2/`. Alternatively, install from bzr and bytecompile:
 
 ```sh
 $ mkdir ~/.emacs/site-lisp
@@ -217,8 +226,8 @@ My `settings-local.el` contains many additional configurations:
 ;; Paths
 ;; -----------------------------------------------------------------------------
 ;;
-(setenv "PATH" (concat "/anaconda/bin:/opt/local/bin:" (getenv "PATH") ))
-(setq exec-path (append '("/anaconda/bin") exec-path))
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize)) ; install "exec-path-from-shell" from EPLA
 ;;
 ;; -----------------------------------------------------------------------------
 ;; Font

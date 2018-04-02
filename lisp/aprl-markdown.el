@@ -18,9 +18,26 @@
 ;;
 ;;------------------------------------------------------------------------------
 
-
 ;;_* ===== markdown-mode =====
 
-(load (aprl-path-join (aprl-search-package 'markdown-mode "~/.emacs.d/site-lisp")
-		 "markdown-mode"))
-(setq auto-mode-alist (cons '("\\.md$" . markdown-mode) auto-mode-alist))
+;; (load (aprl-path-join (aprl-search-package 'markdown-mode "~/.emacs.d/site-lisp")
+;; 		 "markdown-mode"))
+;; (setq auto-mode-alist (cons '("\\.md$" . markdown-mode) auto-mode-alist))
+
+(require 'markdown-mode)
+
+(defun markdown-view-md-in-browser ()
+  "View html output."
+  ;; only tested on OS X  
+  (interactive)
+  (let ((app (cond
+	      ((string-equal system-type "windows-nt") "start") 
+	      ((string-equal system-type "darwin") "open")
+	      ((string-equal system-type "gnu/linux") "xdg-open"))))
+    (start-process
+     "markdown-view-in-browser" "*Messages*"
+     app (buffer-file-name) )))
+
+(add-hook 'markdown-mode-hook
+	    '(lambda ()
+	       (local-set-key (kbd "C-c C-v") 'markdown-view-md-in-browser)))

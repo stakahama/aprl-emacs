@@ -26,6 +26,7 @@
 (defun ns-command-as-meta ()
   (interactive)
   (setq ns-command-modifier 'meta))
+
 (defun ns-command-as-control ()
   (interactive)
   (setq ns-command-modifier 'control))
@@ -42,3 +43,5 @@
 ;;;_ --- custom variables ---
 
 (setq-default ns-command-modifier (quote control))
+
+(setq-default ns-pop-up-frames nil)

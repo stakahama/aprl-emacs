@@ -213,16 +213,30 @@
     (save-restriction
       (widen)
       (goto-char (point-max))
-      (when (re-search-backward "^%%% TeX-master:[ \t]*\"\\([^ \t\n]+\\)\"" nil t)
+      (when (re-search-backward "^%%% TeX-master:[ \t]*\\([t]\\|\"[^ \t\n]+\"\\)" nil t)
 	(let (master)
 	  (setq master (match-string-no-properties 1))
 	  (setq TeX-master
-		(if (eq t master)
+		(if (equal "t" master)
 		    (file-name-nondirectory (buffer-file-name))
-		  master))))))
+		  (replace-regexp-in-string "\"" "" master)))))))
   (message "\"%s\"" TeX-master))
 
 ;; C-c d is too close to "C-c C-d" (TeX-save-document)
 (add-hook 'LaTeX-mode-hook '(lambda ()
 			      (local-set-key (kbd "C-c D") 'aprl-TeX-clean)))
 
+
+
+;; http://www.mfasold.net/blog/2009/02/using-emacs-org-mode-to-draft-papers/
+;; http://www.clarkdonley.com/blog/2014-10-26-org-mode-and-writing-papers-some-tips.html
+(add-hook 'org-mode-hook 'turn-on-org-cdlatex)
+;; (add-hook 'org-mode-hook 'wc-mode)
+
+;; Minimal OS X-friendly configuration of AUCTeX. Since there is no
+;; DVI viewer for the platform, use pdftex/pdflatex by default for
+;; compilation. Furthermore, use 'open' to view the resulting PDF.
+;; Until Preview learns to refresh automatically on file updates, Skim
+;; (http://skim-app.sourceforge.net) is a nice PDF viewer.
+
+;; (setq-default TeX-engine 'xetex)

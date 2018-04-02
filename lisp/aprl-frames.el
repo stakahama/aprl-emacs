@@ -20,8 +20,9 @@
 
 
 ;; desktop functions requires frame-restore.el
-
 ;; http://www.emacswiki.org/emacs/frame-restore.el
+
+;; see also aprl-frames-resizing.el in same directory.
 
 ;;;_* keybindings
 
@@ -95,6 +96,7 @@
 ;;;_  : resize
 
 (defun sizetw (&optional width height)
+  "Resizes frame. (I think this function was originally taken from a help thread)."
   (interactive)
   ;; (flet ((getparm (symbol) 
   ;; 		  (let (value)

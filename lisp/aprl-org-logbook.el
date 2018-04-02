@@ -19,7 +19,9 @@
 ;;------------------------------------------------------------------------------
 
 
-;;
+;; maybe superseded by
+;;   https://erikclarke.net/2014/10/21/keeping-a-lab-notebook-with-org-mode-git-papers-and-pandoc-part-ii/
+;;   https://www.rousette.org.uk/archives/org-mode-and-pandoc/
 
 ;; ST customizations for org-mode to export logbook entries
 ;;
@@ -88,6 +90,37 @@
 	(ad-activate 'org-export-as-latex)
 	(setq org-logbook-mode-p nil))
     ;; else: turn on logbook-mode
+
+;;;_* Additional customizations (moved over from aprl-org.el)
+    
+    (defvar org-logbook-mode-p nil)
+    (defvar org-default-vars nil)
+    (condition-case nil
+	(progn
+	  (require 'aprl-org-logbook)
+	  (require 'aprl-latex)) ; LaTeX-enclose-expression needs to be defined for keybindings below
+      (error nil))
+
+;;;_ . defaults
+
+    (defun org-get-defaults ()
+      (let ((vars '(org-agenda-files
+		    org-format-latex-options
+		    org-export-latex-date-format
+		    org-export-latex-image-default-option
+		    org-export-latex-classes)))
+	(mapcar (lambda (x) (cons x (if (boundp x) (eval x) nil))) vars)))
+
+    (defun org-restore-defaults (default-vars)
+      (interactive)
+      (mapc (lambda (x) 
+	      (set (car x) (cdr x)))
+	    default-vars))
+
+    (setq org-default-vars (org-get-defaults))
+    ;; restore with 
+    ;; (org-restore-defaults org-default-vars)
+
 
 ;;;_* Custom set variables
 

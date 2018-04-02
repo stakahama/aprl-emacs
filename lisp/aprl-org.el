@@ -26,10 +26,12 @@
 ;; (add-to-list 'load-path (aprl-search-package 'org "~/.emacs.d/site-lisp"))
 (add-to-list 'load-path (aprl-search-package 'org "~/.emacs.d/elpa"))
 
-(require 'org-install)
+(require 'org)
+;; (require 'org-install)
 (condition-case nil
     (require 'org-latex)
   (error nil))
+
 ;; The following lines are always needed.  Choose your own keys.
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-c8" 'org-store-link)	;"\C-cl"
@@ -38,77 +40,68 @@
 
 ;;;_ . functions
 
-(defun org-begin-or-end ()
-  (interactive)
-  (flet ((fn (str &optional suffix) 
-	     (save-excursion 
-	       ;; env is dynamically-scoped
-	       (let (pos) ;; (match-beginning 0) will find last match if nil
-		 (setq pos (re-search-backward 
-			    (concat 
-			     (replace-regexp-in-string "\\#\\+" "\\\\#\\\\+" str) 
-			     suffix) () t))
-		 (if suffix 
-		     (setq env (match-string-no-properties 1)))
-		 (or pos 0))))
-	 (upcase-add (str &optional env) 
-		     (save-excursion 
-		       (beginning-of-line)
-		       (insert (concat str env))
-		       (if (< (point) (line-end-position))
-			   (upcase-word 1)))))
-    (let ((st "#+BEGIN_")
-	  (en "#+END_")
-	  env)
-      (if (<= (fn st "\\([A-Z]+\\)") (fn en))
-	  (upcase-add st)
-	(progn
-	  (upcase-add en env)
-	  (end-of-line))))))
+;; use <s TAB (#+BEGIN_SRC/#+END_SRC) or <e TAB instead of function below
+;;
+;; (defun org-begin-or-end ()
+;;   (interactive)
+;;   (flet ((fn (str &optional suffix) 
+;; 	     (save-excursion 
+;; 	       ;; env is dynamically-scoped
+;; 	       (let (pos) ;; (match-beginning 0) will find last match if nil
+;; 		 (setq pos (re-search-backward 
+;; 			    (concat 
+;; 			     (replace-regexp-in-string "\\#\\+" "\\\\#\\\\+" str) 
+;; 			     suffix) () t))
+;; 		 (if suffix 
+;; 		     (setq env (match-string-no-properties 1)))
+;; 		 (or pos 0))))
+;; 	 (upcase-add (str &optional env) 
+;; 		     (save-excursion 
+;; 		       (beginning-of-line)
+;; 		       (insert (concat str env))
+;; 		       (if (< (point) (line-end-position))
+;; 			   (upcase-word 1)))))
+;;     (let ((st "#+BEGIN_")
+;; 	  (en "#+END_")
+;; 	  env)
+;;       (if (<= (fn st "\\([A-Z]+\\)") (fn en))
+;; 	  (upcase-add st)
+;; 	(progn
+;; 	  (upcase-add en env)
+;; 	  (end-of-line))))))
 
-;;;_ . my customizations for export logbook entries
-(defvar org-logbook-mode-p nil)
-(defvar org-default-vars nil)
-(condition-case nil
-    (progn
-      (require 'aprl-org-logbook)
-      (require 'aprl-latex)) ; LaTeX-enclose-expression needs to be defined for keybindings below
-  (error nil))
+(defun org-mode-view-html-in-browser (arg)
+  "Open html file in browser if it exists. 
+Use C-c C-e h h to convert to html.
+Use C-c C-e h o to convert to html + open."
+  ;; only tested on OS X  
+  (interactive "P")
+  (let ((app (cond
+	      ((string-equal system-type "windows-nt") "start") 
+	      ((string-equal system-type "darwin") "open")
+	      ((string-equal system-type "gnu/linux") "xdg-open")))
+	(file-html (concat (file-name-sans-extension (buffer-file-name)) ".html")))
+    ;; (if (not arg)
+    ;; 	(org-html-export-to-html)) ; C-c C-e h h
+    (if (file-exists-p file-html)
+	(start-process
+	 "org-view" "*Messages*"
+	 app file-html))))
 
-;;;_ . defaults
-
-(defun org-get-defaults ()
-  (let ((vars '(org-agenda-files
-		org-format-latex-options
-		org-export-latex-date-format
-		org-export-latex-image-default-option
-		org-export-latex-classes)))
-    (mapcar (lambda (x) (cons x (if (boundp x) (eval x) nil))) vars)))
-
-(defun org-restore-defaults (default-vars)
-  (interactive)
-  (mapc (lambda (x) 
-	  (set (car x) (cdr x)))
-	default-vars))
-
-(setq org-default-vars (org-get-defaults))
-;; restore with 
-;; (org-restore-defaults org-default-vars)
 
 ;;;_ . further customizations
 (add-hook 'org-mode-hook
 	  '(lambda ()
 	     ;;(auto-fill-mode 1)
 	     ;;(org-indent-mode t)
-	     (local-set-key [(shift f5)] 'org-export-as-latex)
 	     (local-set-key (kbd "C-c e") 
 			    (LaTeX-enclose-expression "\\(" "\\)"))
 	     (local-set-key (kbd "C-c r")
 			    'LaTeX-wrap-environment-around-thing-or-region)
-	     (local-set-key (kbd "C-c s")
-			    'org-begin-or-end)
-	     (define-key org-mode-map "\M-q" 'fill-paragraph)
-	     (local-set-key [(shift f6)] 'org-export-as-html)))
+	     ;; (local-set-key (kbd "C-c s") 'org-begin-or-end)
+	     (define-key org-mode-map "\M-q" 'fill-paragraph)))
+	     ;; (local-set-key (kbd "C-c C-v") 'org-mode-view-html-in-browser)))
+	     
 
 ;;;_ . --- custom variables ---
 

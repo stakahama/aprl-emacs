@@ -40,6 +40,12 @@
 (setq comint-scroll-to-bottom-on-output t)
 (setq comint-move-point-for-output t)
 (autoload 'ess-rdired "ess-rdired" "View R objects in a dired-like buffer." t)
+(setq ess-nuke-trailing-whitespace-p nil) ; later addition
+
+;; (remove-hook 'ess-mode-hook 'turn-on-folding-mode)
+;; (remove-hook 'ess-mode-hook (car ess-mode-hook))
+;; (remove-hook 'tex-mode-hook 'turn-on-folding-mode)
+;; (remove-hook 'tex-mode-hook (car tex-mode-hook))
 
 ;; ---
 ;; (setq inferior-ess-r-help-command "utils::help(\"%s\", help_type=\"html\")\n")
@@ -110,6 +116,11 @@
 ;; (require 'ess-R-data-view)
 ;; (define-key ess-mode-map (kbd "C-c v") 'ess-R-dv-ctable)
 ;; (define-key ess-mode-map (kbd "C-c V") 'ess-R-dv-pprint)
+
+;;;_* ===== ess-R =====
+
+(require 'ess-R-object-popup)
+(require 'ess-R-data-view)
 
 ;;;_* ===== Sweave =====
 ;; http://www.mail-archive.com/auctex@gnu.org/msg03386.html
